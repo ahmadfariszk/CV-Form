@@ -1,55 +1,73 @@
 import { useState } from "react";
 
-function WorkExperience() {
-  const [showForm, setShowForm] = useState(false);
-  const [submittedData, setSubmittedData] = useState([]);
+function WorkExperience(props) {
+  const {
+    formData,
+    setFormData,
+    submittedData,
+    setSubmittedData,
+    showForm,
+    setshowForm,
+    handleInputChangeFactory,
+    handleSubmitFactory,
+    handleRemoveDataFactory,
+    handleEditDataFactory,
+    toggleForm,
+  } = props;
 
-  const [formData, setFormData] = useState({
-    jobTitle: "",
-    company: "",
-    dateStart: "",
-    dateEnd: "",
-  });
-  const handleInputChange = (event) => {
-    const { name, value } = event.target;
-    setFormData({
-      ...formData,
-      [name]: value,
-    });
-  };
-  const handleSubmit = (event) => {
-    event.preventDefault(); //negates the deault submitbutton beahviour i.e. refresh page
-    console.log("Form submitted:", formData);
-    setSubmittedData((prevSubmittedData) => [...prevSubmittedData, formData]);
-    setFormData({
-      jobTitle: "",
-      company: "",
-      dateStart: "",
-      dateEnd: "",
-    });
-    setShowForm(false);
-  };
-  const handleRemoveData = (index) => {
-    setSubmittedData((prevSubmittedData) =>
-      prevSubmittedData.filter((_, i) => i !== index)
-    );
-  };
-  const toggleForm = () => {
-    setShowForm(!showForm);
-  };
+  const handleInputChange = handleInputChangeFactory(setFormData);
+  const handleSubmit = handleSubmitFactory(setSubmittedData, setFormData, formData, submittedData);
+  const handleRemoveData = handleRemoveDataFactory(setSubmittedData);
+  const handleEditData = handleEditDataFactory(setFormData, submittedData);
+  // const [showForm, setShowForm] = useState(false);
+  // const [submittedData, setSubmittedData] = useState([]);
+
+  // const [formData, setFormData] = useState({
+  //   jobTitle: "",
+  //   company: "",
+  //   dateStart: "",
+  //   dateEnd: "",
+  // });
+  // const handleInputChange = (event) => {
+  //   const { name, value } = event.target;
+  //   setFormData({
+  //     ...formData,
+  //     [name]: value,
+  //   });
+  // };
+  // const handleSubmit = (event) => {
+  //   event.preventDefault(); //negates the deault submitbutton beahviour i.e. refresh page
+  //   console.log("Form submitted:", formData);
+  //   setSubmittedData((prevSubmittedData) => [...prevSubmittedData, formData]);
+  //   setFormData({
+  //     jobTitle: "",
+  //     company: "",
+  //     dateStart: "",
+  //     dateEnd: "",
+  //   });
+  //   setShowForm(false);
+  // };
+  // const handleRemoveData = (index) => {
+  //   setSubmittedData((prevSubmittedData) =>
+  //     prevSubmittedData.filter((_, i) => i !== index)
+  //   );
+  // };
+  // const toggleForm = () => {
+  //   setShowForm(!showForm);
+  // };
   return (
     <>
       <div>
         <div>
           <h3>Work Experience</h3>
         </div>
-        {console.log("submitted:", submittedData)}
         {submittedData.length > 0 && submittedData.map((data, index) => (
             <div key={index}>
               <p>Submitted Data:</p>
               <p>{data.jobTitle}</p>
               <p>{data.company}</p>
               <button onClick={() => handleRemoveData(index)}>Remove</button>
+              <button onClick={() => handleEditData(index)} disabled={showForm? (true) : (false) }>Edit</button>
             </div>
           ))}
         {showForm ? (
@@ -94,6 +112,7 @@ function WorkExperience() {
             </div>
             <div>
               <input type="submit" value="Submit" />
+              <button onClick={() => console.log(submittedData)}>Log</button>
             </div>
           </form>
         ) : (
