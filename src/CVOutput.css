@@ -1,30 +1,75 @@
 /* Top level container */
-.CVContainer{
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    aspect-ratio: 1 / 1.414; /* 1 / √2 (approximately 0.707), the A4 aspect ratio */
-    max-width: 100%;
-    max-height: 100vh;
-    font-size: 12pt;
+.CVContainer {
+  font-family: "Glacial Indifference", sans-serif;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  aspect-ratio: 1 / 1.414; /* 1 / √2 (approximately 0.707), the A4 aspect ratio */
+  max-width: 100%;
+  max-height: 120vh;
+  font-size: 12pt;
 }
 
 /* Section container  */
-
-
-.contactsContainer{
-    display:flex;
-    justify-content: space-around;
-
+.headerContainer {
+    background-color: #ad88c6;
+  color: white;
+  padding: 25px 15px 15px;
+}
+.headerContainer div {
+  margin: 5px;
+}
+.contactsContainer {
+  background-color: #7469b6;
+  display: flex;
+  justify-content: space-around;
+  color: white;
+  width: 100%;
+  gap: 20px;
+  padding: 10px 0px;
+}
+.workContainer {
+  background-color: #ffe6e6;
+  width: 100%;
+}
+.workSubContainer,
+.educationSubContainer {
+  font-family: "Glacial Indifference", sans-serif;
+  margin-left: 2%;
+}
+.educationContainer {
+  background-color: #e1afd1;
+  width: 100%;
+}
+.educationSubContainer {
 }
 
 /* Line styling  */
-.headerName{
-    font-size: 2.7em;
+.headerName {
+    font-family: "Merriweather", sans-serif;
+  font-size: 2.5em;
+  font-weight: 700;
 }
-.headerPosition{
-    font-size: 1.5em;
+.headerPosition {
+  font-size: 1.5em;
+  font-weight: 500;
 }
-.headerBrief{
-    font-size: 1.1em;
+.headerBrief {
+  font-size: 1.1em;
+}
+.workContainerHeader,
+.educationContainerHeader {
+  font-weight: 600;
+  font-size: 1.4em;
+  text-transform: uppercase;
+  text-decoration: underline;
+  margin: 1% 2% 0%;
+}
+.workTitle {
+  font-size: 1.2em;
+  font-weight: 00;
+}
+.workCompany {
+}
+.workDate {
 }
