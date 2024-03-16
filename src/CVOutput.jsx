@@ -9,7 +9,7 @@ function CVOutput(props) {
       {generalData.map((info) => (
         <div key={info.name} className="headerContainer">
           <div className="headerName">{info.name}</div>
-          <div className="headerPosition">Senior Position Engineer</div>
+          <div className="headerPosition">{info.currentPosition}</div>
           <div className="headerBrief">
             will result in 4 Needleticks and 0 Daggers. Additionally, while
             holding a given void item, picking up its counterpart will instantly
@@ -17,11 +17,11 @@ function CVOutput(props) {
           </div>
         </div>
       ))}
-      <div className="contactsContainer">
-        <div>example.etcera123@email.com.edu.my</div>
-        <div>+601512459087</div>
-        <div>linkedin.com/exampleLCetcetera</div>
-      </div>
+      {generalData.map((info)=>(<div key={info.name} className="contactsContainer">
+        <div>{info.email}</div>
+        <div>{info.phoneNumber}</div>
+        <div>{info.linkedIn}</div>
+      </div>))}
       <div className="workContainer">
         <div className="workContainerHeader">Work Experience</div>
         <div className="workSubContainer">

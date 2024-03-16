@@ -2,7 +2,7 @@ export function generalMockData() {
     return [
         {
             name: "John Doe ibnu James Bond",
-            currentPosition: "Software Engineer",
+            currentPosition: "Supreme LEvel 4 Software Engineer",
             phoneNumber: "+60123-456-7890",
             email: "john.doe@example.com",
             linkedIn: "https://www.linkedin.com/in/johndoe"
