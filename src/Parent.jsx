@@ -4,6 +4,7 @@ import WorkExperience from "./WorkExp";
 import GeneralInfo from "./GeneralInfo";
 import EducationInfo from "./Education";
 import CVOutput from "./CVOutput";
+import { generalMockData, workMockData, educationMockData } from "./assets/mockdata";
 
 function Parent() {
   // State Hook (form data) declarations
@@ -27,9 +28,9 @@ function Parent() {
     dateEnd: "",
     result: "",
   });
-  const [submittedGeneral, setSubmittedGeneral] = useState([]);
-  const [submittedWorkExp, setSubmittedWorkExp] = useState([]);
-  const [submittedEducation, setSubmittedEducation] = useState([]);
+  const [submittedGeneral, setSubmittedGeneral] = useState(generalMockData());
+  const [submittedWorkExp, setSubmittedWorkExp] = useState(workMockData());
+  const [submittedEducation, setSubmittedEducation] = useState(educationMockData());
 
   // State Hook (non-data) declarations
   //
@@ -129,7 +130,11 @@ function Parent() {
           toggleForm={toggleForm}
         />
       </div>
-      <CVOutput/>
+      <CVOutput
+        generalData={submittedGeneral}
+        workData={submittedWorkExp}
+        educationData={submittedEducation}
+      />
     </div>
   );
 }
