@@ -1,3 +1,4 @@
+
 /* Top level container */
 .CVContainer {
   font-family: "Glacial Indifference", sans-serif;
@@ -8,45 +9,49 @@
   max-width: 100%;
   max-height: 120vh;
   font-size: 12pt;
+  background-color: rgb(239, 238, 238); 
+  filter: drop-shadow(18px 21px 21px #4b4b4b);
+  margin-left: 2%;
+  padding: 10px;
+  gap: 20px;
+}
+
+ul {
+    margin: 0px;
 }
 
 /* Section container  */
 .headerContainer {
-    background-color: #ad88c6;
-  color: white;
-  padding: 25px 15px 15px;
+  padding: 25px 15px 0px 15px;
 }
 .headerContainer div {
   margin: 5px;
 }
 .contactsContainer {
-  background-color: #7469b6;
+  background-color: #3a316e;
   display: flex;
-  justify-content: space-around;
+  justify-content: space-evenly;
   color: white;
   width: 100%;
   gap: 20px;
-  padding: 10px 0px;
+  padding: 10px;
 }
 .workContainer {
-  background-color: #ffe6e6;
   width: 100%;
 }
 .workSubContainer,
 .educationSubContainer {
+    margin: 10px 0px;
   font-family: "Glacial Indifference", sans-serif;
   margin-left: 2%;
 }
 .educationContainer {
-  background-color: #e1afd1;
   width: 100%;
-}
-.educationSubContainer {
 }
 
 /* Line styling  */
 .headerName {
-    font-family: "Merriweather", sans-serif;
+  font-family: "Merriweather", sans-serif;
   font-size: 2.5em;
   font-weight: 700;
 }
@@ -59,17 +64,23 @@
 }
 .workContainerHeader,
 .educationContainerHeader {
+  font-family: "Merriweather", sans-serif;
   font-weight: 600;
   font-size: 1.4em;
   text-transform: uppercase;
-  text-decoration: underline;
+
   margin: 1% 2% 0%;
 }
-.workTitle {
+.workTitle, .educationDegree {
   font-size: 1.2em;
-  font-weight: 00;
+  font-weight: 550;
 }
-.workCompany {
+.workCompany, .educationSchool {
+    font-size: 0.95em;
+    text-transform: uppercase;
+    font-weight: 500;
 }
-.workDate {
+.workDate, .educationDate {
+    font-style: italic;
+    font-size: 0.9em;
 }
