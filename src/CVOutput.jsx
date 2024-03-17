@@ -5,7 +5,8 @@ function CVOutput(props) {
   const { generalData, workData, educationData } = props;
 
   const limitedWorkData = [...workData.slice(0, 3)]; //limit data entry to 3
-  
+  const limitedEducationData = [...educationData.slice(0, 3)];
+
   const formatDate = (dateString) => {
     const parsedDate = new Date(dateString);
     const month = parsedDate.getMonth() + 1; // Adding 1 because getMonth() returns zero-based month index
@@ -40,84 +41,30 @@ function CVOutput(props) {
             <div className="workTitle">{work.jobTitle}</div>
             <div className="workCompany">{work.company}</div>
             <div className="workDate">
-              <span>{formatDate(work.dateStart)}</span> - <span>{formatDate(work.dateEnd)}</span>
+              <span>{formatDate(work.dateStart)}</span> -{" "}
+              <span>{formatDate(work.dateEnd)}</span>
             </div>
             <ul className="workDescription">
-              <li>
-                {work.jobduty1}{" "}
-              </li>
-              <li>
-                {work.jobduty2}{" "}
-              </li>
-              <li>
-                {work.jobduty3}{" "}
-              </li>
+              <li>{work.jobduty1} </li>
+              <li>{work.jobduty2} </li>
+              <li>{work.jobduty3} </li>
             </ul>
           </div>
         ))}
-        {/* <div className="workSubContainer">
-          <div className="workTitle">Senior Work Position 2</div>
-          <div className="workCompany">Company Name Sdn Bhd 2</div>
-          <div className="workDate">
-            <span>DDMMYYYY</span> to <span>DDMMYYYY</span>
-          </div>
-          <ul className="workDescription">
-            <li>
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-              eiusmod tempor{" "}
-            </li>
-            <li>
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-              eiusmod tempor{" "}
-            </li>
-            <li>
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-              eiusmod tempor{" "}
-            </li>
-          </ul>
-        </div>
-        <div className="workSubContainer">
-          <div className="workTitle">Senior Work Position 3</div>
-          <div className="workCompany">Company Name Sdn Bhd 3</div>
-          <div className="workDate">
-            <span>DDMMYYYY</span> to <span>DDMMYYYY</span>
-          </div>
-          <ul className="workDescription">
-            <li>
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-              eiusmod tempor{" "}
-            </li>
-            <li>
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-              eiusmod tempor{" "}
-            </li>
-            <li>
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-              eiusmod tempor{" "}
-            </li>
-          </ul>
-        </div> */}
       </div>
       <div className="educationContainer">
         <div className="educationContainerHeader">Education</div>
-        <div className="educationSubContainer">
-          <div className="educationDegree">
-            MSc in Greatest Engineering Specialisation in BioElectron
+        {limitedEducationData.map((education) => (
+          <div key={education.school} className="educationSubContainer">
+            <div className="educationDegree">{education.course} </div>
+            <div className="educationSchool">{education.school} </div>
+            <div className="educationDate">
+              {formatDate(education.dateStart)} to{" "}
+              {formatDate(education.dateEnd)}
+            </div>
+            <div className="educationResult">{education.result}</div>
           </div>
-          <div className="educationSchool">
-            The University of Grand Malaysia
-          </div>
-          <div className="educationDate">MMYYYY to MMYYYY</div>
-        </div>
-        <div className="educationSubContainer">
-          <div className="educationDegree">
-            BSc in Supreme Engineering and SuperState
-          </div>
-          <div className="educationSchool">
-            The University of Malaysian Islands
-          </div>
-          <div className="educationDate">MMYYYY to MMYYYY</div>
-        </div>
+        ))}
       </div>
     </div>
   );
