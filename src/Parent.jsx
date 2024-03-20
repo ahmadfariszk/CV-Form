@@ -32,7 +32,8 @@ function Parent() {
 
   // State Hook (non-data) declarations
   //
-  const [showForm, setShowForm] = useState(false);
+  const [showForm, setShowForm] = useState(true); // Set initial state to true by default because user by default need to see input form first
+  const [editIndex, setEditIndex] = useState(null);
 
   // Function Factories definitions
   //
@@ -55,11 +56,14 @@ function Parent() {
     const newData = formData;
     return (event) => {
       event.preventDefault(); //negates the deault submitbutton beahviour i.e. refresh page
-      console.log("Form submitted:", JSON.stringify(formData));
-      console.log("new data:", JSON.stringify(newData));
-      console.log("submitted data:", JSON.stringify(submittedData));
-      setSubmitted((prevData) => [...prevData, newData]);
-      console.log("in setsubmitted: ", [...submittedData, newData]);
+      if (editIndex || Number.isInteger(editIndex)) {
+        let prevData = [...submittedData];
+        prevData[editIndex] = newData;
+        setSubmitted(prevData)
+      } else {
+        setSubmitted((prevData) => [...prevData, newData]);
+      }
+
       setForm((prevState) => {
         const updatedState = {};
         Object.keys(prevState).forEach((key) => {
@@ -68,7 +72,6 @@ function Parent() {
         return updatedState;
       });
       setShowForm(false);
-      console.log("new data:", JSON.stringify(newData));
     };
   };
   const handleRemoveDataFactory = (setStateFunction) => {
@@ -82,6 +85,8 @@ function Parent() {
   const handleEditDataFactory = (setStateFunction, submittedData) => {
     return (index) => {
       setShowForm(true); //show form for index data
+      setEditIndex(index);
+      console.log('editindex: ', editIndex, index)
       setStateFunction(submittedData[index]); //form pre-fill
     };
   };
