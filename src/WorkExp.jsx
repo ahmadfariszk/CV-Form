@@ -10,7 +10,6 @@ function WorkExperience(props) {
     handleSubmitFactory,
     handleRemoveDataFactory,
     handleEditDataFactory,
-    toggleForm,
   } = props;
   const [showForm, setShowForm] = useState(true); // Set initial state to true by default because user by default need to see input form first
   const [editIndex, setEditIndex] = useState(null); // stores index of data being edited

@@ -77,12 +77,12 @@ function Parent() {
     };
   };
   const handleRemoveDataFactory = (
-    setStateFunction, 
-    setShow,
+    setStateFunction,
+    setShowForm,
     submittedData
-    ) => {
+  ) => {
     return (index) => {
-      submittedData.length === 1 && (setShow(true));
+      submittedData.length === 1 && setShowForm(true);
       //if the length is 1, that means it'll be 0 by the end of this funtion, list would be empty and form will be shown
       setStateFunction(
         (prevSubmittedData) => prevSubmittedData.filter((_, i) => i !== index)
@@ -104,9 +104,6 @@ function Parent() {
       setStateFunction(submittedData[index]); //form pre-fill
     };
   };
-  const toggleForm = (setShowForm, showForm) => {
-    setShowForm(!showForm);
-  };
 
   return (
     <div id="mothercontainer">
@@ -119,7 +116,6 @@ function Parent() {
         handleSubmitFactory={handleSubmitFactory}
         handleRemoveDataFactory={handleRemoveDataFactory}
         handleEditDataFactory={handleEditDataFactory}
-        toggleForm={toggleForm}
       />
       <WorkExperience
         formData={workExpForm}
@@ -130,7 +126,6 @@ function Parent() {
         handleSubmitFactory={handleSubmitFactory}
         handleRemoveDataFactory={handleRemoveDataFactory}
         handleEditDataFactory={handleEditDataFactory}
-        toggleForm={toggleForm}
       />
       <EducationInfo
         formData={EducationForm}
@@ -141,7 +136,6 @@ function Parent() {
         handleSubmitFactory={handleSubmitFactory}
         handleRemoveDataFactory={handleRemoveDataFactory}
         handleEditDataFactory={handleEditDataFactory}
-        toggleForm={toggleForm}
       />
     </div>
   );

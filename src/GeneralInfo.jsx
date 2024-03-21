@@ -98,7 +98,6 @@ function GeneralInfo(props) {
         </div>
         <div>
           <input type="submit" value="Submit" />
-          <button onClick={() => console.log(submittedData)}>Log</button>
         </div>
       </form>
     );
