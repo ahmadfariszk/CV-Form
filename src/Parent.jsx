@@ -32,8 +32,9 @@ function Parent() {
 
   // State Hook (non-data) declarations
   //
-  const [showForm, setShowForm] = useState(true); // Set initial state to true by default because user by default need to see input form first
-  const [editIndex, setEditIndex] = useState(null);
+  // const [showForm, setShowForm] = useState(true); // Set initial state to true by default because user by default need to see input form first
+  // const [editIndex, setEditIndex] = useState(null); // stores index of data being edited
+  // const [isEditing, setIsEditing] = useState(false);  // determines if there is an entry being edited or not
 
   // Function Factories definitions
   //
@@ -48,10 +49,15 @@ function Parent() {
     };
   };
   const handleSubmitFactory = (
-    setSubmitted,
-    setForm,
+    setSubmittedData,
+    submittedData,
+    setFormData,
     formData,
-    submittedData
+    setEditIndex,
+    editIndex,
+    setIsEditing,
+    isEditing,
+    setShowForm
   ) => {
     const newData = formData;
     return (event) => {
@@ -59,19 +65,21 @@ function Parent() {
       if (editIndex || Number.isInteger(editIndex)) {
         let prevData = [...submittedData];
         prevData[editIndex] = newData;
-        setSubmitted(prevData)
+        setSubmittedData(prevData);
       } else {
-        setSubmitted((prevData) => [...prevData, newData]);
+        setSubmittedData((prevData) => [...prevData, newData]);
       }
 
-      setForm((prevState) => {
+      setFormData((prevState) => {
         const updatedState = {};
         Object.keys(prevState).forEach((key) => {
           updatedState[key] = "";
         });
         return updatedState;
       });
+      setEditIndex(null);
       setShowForm(false);
+      isEditing? setIsEditing(false): null;
     };
   };
   const handleRemoveDataFactory = (setStateFunction) => {
@@ -82,15 +90,22 @@ function Parent() {
       );
     };
   };
-  const handleEditDataFactory = (setStateFunction, submittedData) => {
+  const handleEditDataFactory = (
+    setStateFunction,
+    setShowForm,
+    setIsEditing,
+    setEditIndex,
+    editIndex,
+    submittedData
+  ) => {
     return (index) => {
-      setShowForm(true); //show form for index data
+      setIsEditing(true); //show form for index data
       setEditIndex(index);
-      console.log('editindex: ', editIndex, index)
+      console.log("editindex: ", editIndex, index);
       setStateFunction(submittedData[index]); //form pre-fill
     };
   };
-  const toggleForm = () => {
+  const toggleForm = (setShowForm, showForm) => {
     setShowForm(!showForm);
   };
 
@@ -112,8 +127,6 @@ function Parent() {
         setFormData={setWorkExpForm}
         submittedData={submittedWorkExp}
         setSubmittedData={setSubmittedWorkExp}
-        showForm={showForm}
-        setShowForm={setShowForm}
         handleInputChangeFactory={handleInputChangeFactory}
         handleSubmitFactory={handleSubmitFactory}
         handleRemoveDataFactory={handleRemoveDataFactory}
