@@ -37,6 +37,7 @@ function GeneralInfo(props) {
   const handleEditData = handleEditDataFactory(
     setFormData,
     setIsEditing,
+    setShowForm,
     setEditIndex,
     editIndex,
     submittedData
@@ -98,6 +99,15 @@ function GeneralInfo(props) {
         </div>
         <div>
           <input type="submit" value="Submit" />
+          {submittedData.length > 0 && (
+            <button
+              onClick={() => (
+                setIsEditing(false), setEditIndex(null), setShowForm(false)
+              )}
+            >
+              Cancel
+            </button>
+          )}
         </div>
       </form>
     );
@@ -132,8 +142,7 @@ function GeneralInfo(props) {
               )}
             </div>
           ))}
-        {showForm && getGeneralInfoForm()}
-        {showForm && submittedData.length > 0 && <button>Cancel</button>}
+        {showForm && !isEditing && getGeneralInfoForm()}
       </div>
     </>
   );

@@ -92,6 +92,7 @@ function Parent() {
   const handleEditDataFactory = (
     setStateFunction,
     setIsEditing,
+    setShowForm,
     setEditIndex,
     editIndex,
     submittedData
@@ -99,6 +100,7 @@ function Parent() {
     return (index) => {
       setIsEditing(true); //show form for index data
       setEditIndex(index);
+      setShowForm(true);
       setStateFunction(submittedData[index]); //form pre-fill
     };
   };

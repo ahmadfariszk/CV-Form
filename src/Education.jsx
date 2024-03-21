@@ -35,6 +35,7 @@ function EducationInfo(props) {
   const handleEditData = handleEditDataFactory(
     setFormData,
     setIsEditing,
+    setShowForm,
     setEditIndex,
     editIndex,
     submittedData
@@ -82,6 +83,15 @@ function EducationInfo(props) {
         </div>
         <div>
           <input type="submit" value="Submit" />
+          {submittedData.length > 0 && (
+            <button
+              onClick={() => (
+                setIsEditing(false), setEditIndex(null), setShowForm(false)
+              )}
+            >
+              Cancel
+            </button>
+          )}
         </div>
       </form>
     );
@@ -108,7 +118,7 @@ function EducationInfo(props) {
                   </button>
                   <button
                     onClick={() => handleEditData(index)}
-                    disabled={isEditing ? true : false}
+                    disabled={isEditing || showForm ? true : false}
                   >
                     Edit
                   </button>
@@ -116,8 +126,7 @@ function EducationInfo(props) {
               )}
             </div>
           ))}
-        {showForm && getEducationForm()}
-        {showForm && submittedData.length > 0 && <button>Cancel</button>}
+        {showForm && !isEditing && getEducationForm()}
         {!isEditing && !showForm && (
           <button onClick={() => setShowForm(true)}>+ Add Workplace</button>
         )}

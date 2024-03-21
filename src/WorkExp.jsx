@@ -35,6 +35,7 @@ function WorkExperience(props) {
   const handleEditData = handleEditDataFactory(
     setFormData,
     setIsEditing,
+    setShowForm,
     setEditIndex,
     editIndex,
     submittedData
@@ -83,6 +84,15 @@ function WorkExperience(props) {
         </div>
         <div>
           <input type="submit" value="Submit" />
+          {submittedData.length > 0 && (
+            <button
+              onClick={() => (
+                setIsEditing(false), setEditIndex(null), setShowForm(false)
+              )}
+            >
+              Cancel
+            </button>
+          )}
         </div>
       </form>
     );
@@ -109,7 +119,7 @@ function WorkExperience(props) {
                   </button>
                   <button
                     onClick={() => handleEditData(index)}
-                    disabled={isEditing ? true : false}
+                    disabled={isEditing || showForm ? true : false}
                   >
                     Edit
                   </button>
@@ -117,8 +127,7 @@ function WorkExperience(props) {
               )}
             </div>
           ))}
-        {showForm && getWorkExpForm()}
-        {showForm && submittedData.length > 0 && <button>Cancel</button>}
+        {showForm && !isEditing && getWorkExpForm()}
         {!isEditing && !showForm && (
           <button onClick={() => setShowForm(true)}>+ Add Workplace</button>
         )}
