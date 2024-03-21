@@ -39,7 +39,6 @@ function Parent() {
         ...data,
         [name]: value,
       }));
-      console.log(name, value);
     };
   };
   const handleSubmitFactory = (
@@ -100,7 +99,6 @@ function Parent() {
     return (index) => {
       setIsEditing(true); //show form for index data
       setEditIndex(index);
-      console.log("editindex: ", editIndex, index);
       setStateFunction(submittedData[index]); //form pre-fill
     };
   };
