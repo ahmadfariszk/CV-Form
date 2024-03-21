@@ -30,12 +30,6 @@ function Parent() {
   const [submittedWorkExp, setSubmittedWorkExp] = useState([]);
   const [submittedEducation, setSubmittedEducation] = useState([]);
 
-  // State Hook (non-data) declarations
-  //
-  // const [showForm, setShowForm] = useState(true); // Set initial state to true by default because user by default need to see input form first
-  // const [editIndex, setEditIndex] = useState(null); // stores index of data being edited
-  // const [isEditing, setIsEditing] = useState(false);  // determines if there is an entry being edited or not
-
   // Function Factories definitions
   //
   const handleInputChangeFactory = (setStateFunction) => {
@@ -79,11 +73,17 @@ function Parent() {
       });
       setEditIndex(null);
       setShowForm(false);
-      isEditing? setIsEditing(false): null;
+      isEditing ? setIsEditing(false) : null;
     };
   };
-  const handleRemoveDataFactory = (setStateFunction) => {
+  const handleRemoveDataFactory = (
+    setStateFunction, 
+    setShow,
+    submittedData
+    ) => {
     return (index) => {
+      submittedData.length === 1 && (setShow(true));
+      //if the length is 1, that means it'll be 0 by the end of this funtion, list would be empty and form will be shown
       setStateFunction(
         (prevSubmittedData) => prevSubmittedData.filter((_, i) => i !== index)
         //coampares the object with index-to-be-removed, i, and if yes, filter it out
@@ -92,7 +92,6 @@ function Parent() {
   };
   const handleEditDataFactory = (
     setStateFunction,
-    setShowForm,
     setIsEditing,
     setEditIndex,
     editIndex,

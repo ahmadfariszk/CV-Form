@@ -28,10 +28,13 @@ function WorkExperience(props) {
     isEditing,
     setShowForm
   );
-  const handleRemoveData = handleRemoveDataFactory(setSubmittedData);
+  const handleRemoveData = handleRemoveDataFactory(
+    setSubmittedData,
+    setShowForm,
+    submittedData
+  );
   const handleEditData = handleEditDataFactory(
     setFormData,
-    setShowForm,
     setIsEditing,
     setEditIndex,
     editIndex,
@@ -95,7 +98,7 @@ function WorkExperience(props) {
         {submittedData.length > 0 &&
           submittedData.map((data, index) => (
             <div key={index}>
-              {isEditing && editIndex===index? (
+              {isEditing && editIndex === index ? (
                 getWorkExpForm()
               ) : (
                 <>
@@ -115,9 +118,8 @@ function WorkExperience(props) {
               )}
             </div>
           ))}
-          {showForm && 
-            getWorkExpForm()
-          }
+        {showForm && getWorkExpForm()}
+        {showForm && submittedData.length > 0 && <button>Cancel</button>}
         {!isEditing && !showForm && (
           <button onClick={() => setShowForm(true)}>+ Add Workplace</button>
         )}
