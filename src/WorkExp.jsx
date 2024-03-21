@@ -6,117 +6,130 @@ function WorkExperience(props) {
     setFormData,
     submittedData,
     setSubmittedData,
-    showForm,
-    setshowForm,
     handleInputChangeFactory,
     handleSubmitFactory,
     handleRemoveDataFactory,
     handleEditDataFactory,
-    toggleForm,
   } = props;
+  const [showForm, setShowForm] = useState(true); // Set initial state to true by default because user by default need to see input form first
+  const [editIndex, setEditIndex] = useState(null); // stores index of data being edited
+  const [isEditing, setIsEditing] = useState(false); // determines if there is an entry being edited or not
 
   const handleInputChange = handleInputChangeFactory(setFormData);
-  const handleSubmit = handleSubmitFactory(setSubmittedData, setFormData, formData, submittedData);
-  const handleRemoveData = handleRemoveDataFactory(setSubmittedData);
-  const handleEditData = handleEditDataFactory(setFormData, submittedData);
-  // const [showForm, setShowForm] = useState(false);
-  // const [submittedData, setSubmittedData] = useState([]);
+  const handleSubmit = handleSubmitFactory(
+    setSubmittedData,
+    submittedData,
+    setFormData,
+    formData,
+    setEditIndex,
+    editIndex,
+    setIsEditing,
+    isEditing,
+    setShowForm
+  );
+  const handleRemoveData = handleRemoveDataFactory(
+    setSubmittedData,
+    setShowForm,
+    submittedData
+  );
+  const handleEditData = handleEditDataFactory(
+    setFormData,
+    setIsEditing,
+    setShowForm,
+    setEditIndex,
+    editIndex,
+    submittedData
+  );
 
-  // const [formData, setFormData] = useState({
-  //   jobTitle: "",
-  //   company: "",
-  //   dateStart: "",
-  //   dateEnd: "",
-  // });
-  // const handleInputChange = (event) => {
-  //   const { name, value } = event.target;
-  //   setFormData({
-  //     ...formData,
-  //     [name]: value,
-  //   });
-  // };
-  // const handleSubmit = (event) => {
-  //   event.preventDefault(); //negates the deault submitbutton beahviour i.e. refresh page
-  //   console.log("Form submitted:", formData);
-  //   setSubmittedData((prevSubmittedData) => [...prevSubmittedData, formData]);
-  //   setFormData({
-  //     jobTitle: "",
-  //     company: "",
-  //     dateStart: "",
-  //     dateEnd: "",
-  //   });
-  //   setShowForm(false);
-  // };
-  // const handleRemoveData = (index) => {
-  //   setSubmittedData((prevSubmittedData) =>
-  //     prevSubmittedData.filter((_, i) => i !== index)
-  //   );
-  // };
-  // const toggleForm = () => {
-  //   setShowForm(!showForm);
-  // };
+  function getWorkExpForm() {
+    return (
+      <form onSubmit={handleSubmit}>
+        <div>
+          <p>Job Title</p>
+          <input
+            type="text"
+            name="jobTitle"
+            id=""
+            value={formData.jobTitle}
+            onChange={handleInputChange}
+          />
+        </div>
+        <div>
+          <p>Company</p>
+          <input
+            type="text"
+            name="company"
+            id=""
+            value={formData.company}
+            onChange={handleInputChange}
+          />
+        </div>
+        <div>
+          <p>Date</p>
+          <input
+            type="date"
+            name="dateStart"
+            id=""
+            value={formData.dateStart}
+            onChange={handleInputChange}
+          />
+          <p>to</p>{" "}
+          <input
+            type="date"
+            name="dateEnd"
+            id=""
+            value={formData.dateEnd}
+            onChange={handleInputChange}
+          />
+        </div>
+        <div>
+          <input type="submit" value="Submit" />
+          {submittedData.length > 0 && (
+            <button
+              onClick={() => (
+                setIsEditing(false), setEditIndex(null), setShowForm(false)
+              )}
+            >
+              Cancel
+            </button>
+          )}
+        </div>
+      </form>
+    );
+  }
+
   return (
     <>
       <div>
         <div>
           <h3>Work Experience</h3>
         </div>
-        {submittedData.length > 0 && submittedData.map((data, index) => (
+        {submittedData.length > 0 &&
+          submittedData.map((data, index) => (
             <div key={index}>
-              <p>Submitted Data:</p>
-              <p>{data.jobTitle}</p>
-              <p>{data.company}</p>
-              <button onClick={() => handleRemoveData(index)}>Remove</button>
-              <button onClick={() => handleEditData(index)} disabled={showForm? (true) : (false) }>Edit</button>
+              {isEditing && editIndex === index ? (
+                getWorkExpForm()
+              ) : (
+                <>
+                  <p>Submitted Data:</p>
+                  <p>{data.jobTitle}</p>
+                  <p>{data.company}</p>
+                  <button onClick={() => handleRemoveData(index)}>
+                    Remove
+                  </button>
+                  <button
+                    onClick={() => handleEditData(index)}
+                    disabled={isEditing || showForm ? true : false}
+                  >
+                    Edit
+                  </button>
+                </>
+              )}
             </div>
           ))}
-        {showForm ? (
-          <form onSubmit={handleSubmit}>
-            <div>
-              <p>Job Title</p>
-              <input
-                type="text"
-                name="jobTitle"
-                id=""
-                value={formData.jobTitle}
-                onChange={handleInputChange}
-              />
-            </div>
-            <div>
-              <p>Company</p>
-              <input
-                type="text"
-                name="company"
-                id=""
-                value={formData.company}
-                onChange={handleInputChange}
-              />
-            </div>
-            <div>
-              <p>Date</p>
-              <input
-                type="date"
-                name="dateStart"
-                id=""
-                value={formData.dateStart}
-                onChange={handleInputChange}
-              />
-              <p>to</p>{" "}
-              <input
-                type="date"
-                name="dateEnd"
-                id=""
-                value={formData.dateEnd}
-                onChange={handleInputChange}
-              />
-            </div>
-            <div>
-              <input type="submit" value="Submit" />
-              <button onClick={() => console.log(submittedData)}>Log</button>
-            </div>
-          </form>
-        ) : (
-          <button onClick={toggleForm}>+</button>
+        {showForm && !isEditing && getWorkExpForm()}
+        {!isEditing && !showForm && (
+          <button onClick={() => setShowForm(true)}>+ Add Workplace</button>
         )}
       </div>
     </>

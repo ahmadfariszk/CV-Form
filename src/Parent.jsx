@@ -30,10 +30,6 @@ function Parent() {
   const [submittedWorkExp, setSubmittedWorkExp] = useState([]);
   const [submittedEducation, setSubmittedEducation] = useState([]);
 
-  // State Hook (non-data) declarations
-  //
-  const [showForm, setShowForm] = useState(false);
-
   // Function Factories definitions
   //
   const handleInputChangeFactory = (setStateFunction) => {
@@ -43,50 +39,70 @@ function Parent() {
         ...data,
         [name]: value,
       }));
-      console.log(name, value);
     };
   };
   const handleSubmitFactory = (
-    setSubmitted,
-    setForm,
+    setSubmittedData,
+    submittedData,
+    setFormData,
     formData,
-    submittedData
+    setEditIndex,
+    editIndex,
+    setIsEditing,
+    isEditing,
+    setShowForm
   ) => {
     const newData = formData;
     return (event) => {
       event.preventDefault(); //negates the deault submitbutton beahviour i.e. refresh page
-      console.log("Form submitted:", JSON.stringify(formData));
-      console.log("new data:", JSON.stringify(newData));
-      console.log("submitted data:", JSON.stringify(submittedData));
-      setSubmitted((prevData) => [...prevData, newData]);
-      console.log("in setsubmitted: ", [...submittedData, newData]);
-      setForm((prevState) => {
+      if (editIndex || Number.isInteger(editIndex)) {
+        let prevData = [...submittedData];
+        prevData[editIndex] = newData;
+        setSubmittedData(prevData);
+      } else {
+        setSubmittedData((prevData) => [...prevData, newData]);
+      }
+
+      setFormData((prevState) => {
         const updatedState = {};
         Object.keys(prevState).forEach((key) => {
           updatedState[key] = "";
         });
         return updatedState;
       });
+      setEditIndex(null);
       setShowForm(false);
-      console.log("new data:", JSON.stringify(newData));
+      isEditing ? setIsEditing(false) : null;
     };
   };
-  const handleRemoveDataFactory = (setStateFunction) => {
+  const handleRemoveDataFactory = (
+    setStateFunction,
+    setShowForm,
+    submittedData
+  ) => {
     return (index) => {
+      submittedData.length === 1 && setShowForm(true);
+      //if the length is 1, that means it'll be 0 by the end of this funtion, list would be empty and form will be shown
       setStateFunction(
         (prevSubmittedData) => prevSubmittedData.filter((_, i) => i !== index)
         //coampares the object with index-to-be-removed, i, and if yes, filter it out
       );
     };
   };
-  const handleEditDataFactory = (setStateFunction, submittedData) => {
+  const handleEditDataFactory = (
+    setStateFunction,
+    setIsEditing,
+    setShowForm,
+    setEditIndex,
+    editIndex,
+    submittedData
+  ) => {
     return (index) => {
-      setShowForm(true); //show form for index data
+      setIsEditing(true); //show form for index data
+      setEditIndex(index);
+      setShowForm(true);
       setStateFunction(submittedData[index]); //form pre-fill
     };
-  };
-  const toggleForm = () => {
-    setShowForm(!showForm);
   };
 
   return (
@@ -100,20 +116,16 @@ function Parent() {
         handleSubmitFactory={handleSubmitFactory}
         handleRemoveDataFactory={handleRemoveDataFactory}
         handleEditDataFactory={handleEditDataFactory}
-        toggleForm={toggleForm}
       />
       <WorkExperience
         formData={workExpForm}
         setFormData={setWorkExpForm}
         submittedData={submittedWorkExp}
         setSubmittedData={setSubmittedWorkExp}
-        showForm={showForm}
-        setShowForm={setShowForm}
         handleInputChangeFactory={handleInputChangeFactory}
         handleSubmitFactory={handleSubmitFactory}
         handleRemoveDataFactory={handleRemoveDataFactory}
         handleEditDataFactory={handleEditDataFactory}
-        toggleForm={toggleForm}
       />
       <EducationInfo
         formData={EducationForm}
@@ -124,7 +136,6 @@ function Parent() {
         handleSubmitFactory={handleSubmitFactory}
         handleRemoveDataFactory={handleRemoveDataFactory}
         handleEditDataFactory={handleEditDataFactory}
-        toggleForm={toggleForm}
       />
     </div>
   );
