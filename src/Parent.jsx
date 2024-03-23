@@ -3,6 +3,8 @@ import "./Parent.css";
 import WorkExperience from "./WorkExp";
 import GeneralInfo from "./GeneralInfo";
 import EducationInfo from "./Education";
+import CVOutput from "./CVOutput";
+import { generalMockData, workMockData, educationMockData } from "./assets/mockdata";
 
 function Parent() {
   // State Hook (form data) declarations
@@ -107,6 +109,7 @@ function Parent() {
 
   return (
     <div id="mothercontainer">
+      <div>
       <GeneralInfo
         formData={generalForm}
         setFormData={setGeneralForm}
@@ -136,6 +139,12 @@ function Parent() {
         handleSubmitFactory={handleSubmitFactory}
         handleRemoveDataFactory={handleRemoveDataFactory}
         handleEditDataFactory={handleEditDataFactory}
+      />
+      </div>
+      <CVOutput
+        generalData={submittedGeneral}
+        workData={submittedWorkExp}
+        educationData={submittedEducation}
       />
     </div>
   );
