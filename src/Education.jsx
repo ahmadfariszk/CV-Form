@@ -44,17 +44,27 @@ function EducationInfo(props) {
     return (
       <form onSubmit={handleSubmit}>
         <div>
-          <p>School/Instituition</p>
+          <div>Course</div>
           <input
             type="text"
-            name="jobTitle"
+            name="course"
             id=""
-            value={formData.jobTitle}
+            value={formData.course}
             onChange={handleInputChange}
           />
         </div>
         <div>
-          <p>Date</p>
+          <div>School/Instituition</div>
+          <input
+            type="text"
+            name="school"
+            id=""
+            value={formData.school}
+            onChange={handleInputChange}
+          />
+        </div>
+        <div>
+          <div>Date</div>
           <input
             type="date"
             name="dateStart"
@@ -62,7 +72,7 @@ function EducationInfo(props) {
             value={formData.dateStart}
             onChange={handleInputChange}
           />
-          <p>to</p>{" "}
+          <div>to</div>{" "}
           <input
             type="date"
             name="dateEnd"
@@ -72,12 +82,12 @@ function EducationInfo(props) {
           />
         </div>
         <div>
-          <p>Results</p>
+          <div>Results</div>
           <input
             type="text"
-            name="company"
+            name="result"
             id=""
-            value={formData.company}
+            value={formData.result}
             onChange={handleInputChange}
           />
         </div>
