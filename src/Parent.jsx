@@ -3,6 +3,12 @@ import "./Parent.css";
 import WorkExperience from "./WorkExp";
 import GeneralInfo from "./GeneralInfo";
 import EducationInfo from "./Education";
+import CVOutput from "./CVOutput";
+import {
+  generalMockData,
+  workMockData,
+  educationMockData,
+} from "./assets/mockdata";
 
 function Parent() {
   // State Hook (form data) declarations
@@ -107,35 +113,42 @@ function Parent() {
 
   return (
     <div id="mothercontainer">
-      <GeneralInfo
-        formData={generalForm}
-        setFormData={setGeneralForm}
-        submittedData={submittedGeneral}
-        setSubmittedData={setSubmittedGeneral}
-        handleInputChangeFactory={handleInputChangeFactory}
-        handleSubmitFactory={handleSubmitFactory}
-        handleRemoveDataFactory={handleRemoveDataFactory}
-        handleEditDataFactory={handleEditDataFactory}
-      />
-      <WorkExperience
-        formData={workExpForm}
-        setFormData={setWorkExpForm}
-        submittedData={submittedWorkExp}
-        setSubmittedData={setSubmittedWorkExp}
-        handleInputChangeFactory={handleInputChangeFactory}
-        handleSubmitFactory={handleSubmitFactory}
-        handleRemoveDataFactory={handleRemoveDataFactory}
-        handleEditDataFactory={handleEditDataFactory}
-      />
-      <EducationInfo
-        formData={EducationForm}
-        setFormData={setEducationForm}
-        submittedData={submittedEducation}
-        setSubmittedData={setSubmittedEducation}
-        handleInputChangeFactory={handleInputChangeFactory}
-        handleSubmitFactory={handleSubmitFactory}
-        handleRemoveDataFactory={handleRemoveDataFactory}
-        handleEditDataFactory={handleEditDataFactory}
+      <div>
+        <GeneralInfo
+          formData={generalForm}
+          setFormData={setGeneralForm}
+          submittedData={submittedGeneral}
+          setSubmittedData={setSubmittedGeneral}
+          handleInputChangeFactory={handleInputChangeFactory}
+          handleSubmitFactory={handleSubmitFactory}
+          handleRemoveDataFactory={handleRemoveDataFactory}
+          handleEditDataFactory={handleEditDataFactory}
+        />
+        <WorkExperience
+          formData={workExpForm}
+          setFormData={setWorkExpForm}
+          submittedData={submittedWorkExp}
+          setSubmittedData={setSubmittedWorkExp}
+          handleInputChangeFactory={handleInputChangeFactory}
+          handleSubmitFactory={handleSubmitFactory}
+          handleRemoveDataFactory={handleRemoveDataFactory}
+          handleEditDataFactory={handleEditDataFactory}
+        />
+        <EducationInfo
+          formData={EducationForm}
+          setFormData={setEducationForm}
+          submittedData={submittedEducation}
+          setSubmittedData={setSubmittedEducation}
+          handleInputChangeFactory={handleInputChangeFactory}
+          handleSubmitFactory={handleSubmitFactory}
+          handleRemoveDataFactory={handleRemoveDataFactory}
+          handleEditDataFactory={handleEditDataFactory}
+        />
+      </div>
+      <CVOutput
+        generalData={submittedGeneral}
+        workData={submittedWorkExp}
+        educationData={submittedEducation}
       />
     </div>
   );
