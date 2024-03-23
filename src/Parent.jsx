@@ -1,5 +1,5 @@
 import { useState } from "react";
-import "./Parent.css";
+import "./styles/Parent.css";
 import WorkExperience from "./WorkExp";
 import GeneralInfo from "./GeneralInfo";
 import EducationInfo from "./Education";

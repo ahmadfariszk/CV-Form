@@ -1,5 +1,5 @@
 import React from "react";
-import "./CVOutput.css";
+import "./styles/CVOutput.css";
 
 function CVOutput(props) {
   const { generalData, workData, educationData } = props;
