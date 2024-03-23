@@ -47,8 +47,7 @@ function GeneralInfo(props) {
     return (
       <form onSubmit={handleSubmit}>
         <div>
-          <label>Name</label>
-          <br />
+          <div>Name</div>
           <input
             type="text"
             name="name"
@@ -58,7 +57,7 @@ function GeneralInfo(props) {
           />
         </div>
         <div>
-          <p>Current Position</p>
+          <div>Current Position</div>
           <input
             type="text"
             name="currentPosition"
@@ -68,7 +67,7 @@ function GeneralInfo(props) {
           />
         </div>
         <div>
-          <p>Phone Number</p>
+          <div>Phone Number</div>
           <input
             type="text"
             name="phoneNumber"
@@ -78,7 +77,7 @@ function GeneralInfo(props) {
           />
         </div>
         <div>
-          <p>Email</p>
+          <div>Email</div>
           <input
             type="text"
             name="email"
@@ -88,7 +87,7 @@ function GeneralInfo(props) {
           />
         </div>
         <div>
-          <p>LinkedIn</p>
+          <div>LinkedIn</div>
           <input
             type="url"
             name="linkedIn"
