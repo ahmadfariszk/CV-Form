@@ -45,7 +45,7 @@ function WorkExperience(props) {
     return (
       <form onSubmit={handleSubmit}>
         <div>
-          <p>Job Title</p>
+          <div>Job Title</div>
           <input
             type="text"
             name="jobTitle"
@@ -55,7 +55,7 @@ function WorkExperience(props) {
           />
         </div>
         <div>
-          <p>Company</p>
+          <div>Company</div>
           <input
             type="text"
             name="company"
@@ -65,7 +65,7 @@ function WorkExperience(props) {
           />
         </div>
         <div>
-          <p>Date</p>
+          <div>Date</div>
           <input
             type="date"
             name="dateStart"
@@ -73,7 +73,7 @@ function WorkExperience(props) {
             value={formData.dateStart}
             onChange={handleInputChange}
           />
-          <p>to</p>{" "}
+          <div>to</div>{" "}
           <input
             type="date"
             name="dateEnd"
@@ -81,6 +81,39 @@ function WorkExperience(props) {
             value={formData.dateEnd}
             onChange={handleInputChange}
           />
+        </div>
+        <div>
+          <div>Job duties</div>
+          <div>
+            <span>1:</span>
+            <input
+              type="text"
+              name="jobduty1"
+              id=""
+              value={formData.jobduty1}
+              onChange={handleInputChange}
+            />
+          </div>
+          <div>
+            <span>2:</span>
+            <input
+              type="text"
+              name="jobduty2"
+              id=""
+              value={formData.jobduty2}
+              onChange={handleInputChange}
+            />
+          </div>
+          <div>
+            <span>3:</span>
+            <input
+              type="text"
+              name="jobduty3"
+              id=""
+              value={formData.jobduty3}
+              onChange={handleInputChange}
+            />
+          </div>
         </div>
         <div>
           <input type="submit" value="Submit" />
