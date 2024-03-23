@@ -21,16 +21,25 @@ function Parent() {
     company: "",
     dateStart: "",
     dateEnd: "",
+    jobduty1: "",
+    jobduty2: "",
+    jobduty3: "",
   });
   const [EducationForm, setEducationForm] = useState({
+    course: "",
     school: "",
     dateStart: "",
     dateEnd: "",
     result: "",
   });
+  
   const [submittedGeneral, setSubmittedGeneral] = useState([]);
   const [submittedWorkExp, setSubmittedWorkExp] = useState([]);
   const [submittedEducation, setSubmittedEducation] = useState([]);
+
+  // State Hook (non-data) declarations
+  //
+  const [showForm, setShowForm] = useState(false);
 
   // Function Factories definitions
   //
@@ -41,105 +50,90 @@ function Parent() {
         ...data,
         [name]: value,
       }));
+      console.log(name, value);
     };
   };
   const handleSubmitFactory = (
-    setSubmittedData,
-    submittedData,
-    setFormData,
+    setSubmitted,
+    setForm,
     formData,
-    setEditIndex,
-    editIndex,
-    setIsEditing,
-    isEditing,
-    setShowForm
+    submittedData
   ) => {
     const newData = formData;
     return (event) => {
       event.preventDefault(); //negates the deault submitbutton beahviour i.e. refresh page
-      if (editIndex || Number.isInteger(editIndex)) {
-        let prevData = [...submittedData];
-        prevData[editIndex] = newData;
-        setSubmittedData(prevData);
-      } else {
-        setSubmittedData((prevData) => [...prevData, newData]);
-      }
-
-      setFormData((prevState) => {
+      console.log("Form submitted:", JSON.stringify(formData));
+      console.log("new data:", JSON.stringify(newData));
+      console.log("submitted data:", JSON.stringify(submittedData));
+      setSubmitted((prevData) => [...prevData, newData]);
+      console.log("in setsubmitted: ", [...submittedData, newData]);
+      setForm((prevState) => {
         const updatedState = {};
         Object.keys(prevState).forEach((key) => {
           updatedState[key] = "";
         });
         return updatedState;
       });
-      setEditIndex(null);
       setShowForm(false);
-      isEditing ? setIsEditing(false) : null;
+      console.log("new data:", JSON.stringify(newData));
     };
   };
-  const handleRemoveDataFactory = (
-    setStateFunction,
-    setShowForm,
-    submittedData
-  ) => {
+  const handleRemoveDataFactory = (setStateFunction) => {
     return (index) => {
-      submittedData.length === 1 && setShowForm(true);
-      //if the length is 1, that means it'll be 0 by the end of this funtion, list would be empty and form will be shown
       setStateFunction(
         (prevSubmittedData) => prevSubmittedData.filter((_, i) => i !== index)
         //coampares the object with index-to-be-removed, i, and if yes, filter it out
       );
     };
   };
-  const handleEditDataFactory = (
-    setStateFunction,
-    setIsEditing,
-    setShowForm,
-    setEditIndex,
-    editIndex,
-    submittedData
-  ) => {
+  const handleEditDataFactory = (setStateFunction, submittedData) => {
     return (index) => {
-      setIsEditing(true); //show form for index data
-      setEditIndex(index);
-      setShowForm(true);
+      setShowForm(true); //show form for index data
       setStateFunction(submittedData[index]); //form pre-fill
     };
+  };
+  const toggleForm = () => {
+    setShowForm(!showForm);
   };
 
   return (
     <div id="mothercontainer">
       <div>
-      <GeneralInfo
-        formData={generalForm}
-        setFormData={setGeneralForm}
-        submittedData={submittedGeneral}
-        setSubmittedData={setSubmittedGeneral}
-        handleInputChangeFactory={handleInputChangeFactory}
-        handleSubmitFactory={handleSubmitFactory}
-        handleRemoveDataFactory={handleRemoveDataFactory}
-        handleEditDataFactory={handleEditDataFactory}
-      />
-      <WorkExperience
-        formData={workExpForm}
-        setFormData={setWorkExpForm}
-        submittedData={submittedWorkExp}
-        setSubmittedData={setSubmittedWorkExp}
-        handleInputChangeFactory={handleInputChangeFactory}
-        handleSubmitFactory={handleSubmitFactory}
-        handleRemoveDataFactory={handleRemoveDataFactory}
-        handleEditDataFactory={handleEditDataFactory}
-      />
-      <EducationInfo
-        formData={EducationForm}
-        setFormData={setEducationForm}
-        submittedData={submittedEducation}
-        setSubmittedData={setSubmittedEducation}
-        handleInputChangeFactory={handleInputChangeFactory}
-        handleSubmitFactory={handleSubmitFactory}
-        handleRemoveDataFactory={handleRemoveDataFactory}
-        handleEditDataFactory={handleEditDataFactory}
-      />
+        <GeneralInfo
+          formData={generalForm}
+          setFormData={setGeneralForm}
+          submittedData={submittedGeneral}
+          setSubmittedData={setSubmittedGeneral}
+          handleInputChangeFactory={handleInputChangeFactory}
+          handleSubmitFactory={handleSubmitFactory}
+          handleRemoveDataFactory={handleRemoveDataFactory}
+          handleEditDataFactory={handleEditDataFactory}
+          toggleForm={toggleForm}
+        />
+        <WorkExperience
+          formData={workExpForm}
+          setFormData={setWorkExpForm}
+          submittedData={submittedWorkExp}
+          setSubmittedData={setSubmittedWorkExp}
+          showForm={showForm}
+          setShowForm={setShowForm}
+          handleInputChangeFactory={handleInputChangeFactory}
+          handleSubmitFactory={handleSubmitFactory}
+          handleRemoveDataFactory={handleRemoveDataFactory}
+          handleEditDataFactory={handleEditDataFactory}
+          toggleForm={toggleForm}
+        />
+        <EducationInfo
+          formData={EducationForm}
+          setFormData={setEducationForm}
+          submittedData={submittedEducation}
+          setSubmittedData={setSubmittedEducation}
+          handleInputChangeFactory={handleInputChangeFactory}
+          handleSubmitFactory={handleSubmitFactory}
+          handleRemoveDataFactory={handleRemoveDataFactory}
+          handleEditDataFactory={handleEditDataFactory}
+          toggleForm={toggleForm}
+        />
       </div>
       <CVOutput
         generalData={submittedGeneral}
