@@ -143,6 +143,7 @@ function GeneralInfo(props) {
             </div>
           ))}
         {showForm && !isEditing && getGeneralInfoForm()}
+        {<button onClick={() => console.log(submittedData[0])}>Log</button>}
       </div>
     </>
   );
