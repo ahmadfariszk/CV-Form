@@ -8,7 +8,7 @@ import {
   generalMockData,
   workMockData,
   educationMockData,
-} from "./assets/mockdata";
+} from "../assets/mockdata";
 
 function Parent() {
   // State Hook (form data) declarations
