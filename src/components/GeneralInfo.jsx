@@ -46,7 +46,7 @@ function GeneralInfo(props) {
   function getGeneralInfoForm() {
     return (
       <form onSubmit={handleSubmit}>
-        <div>
+        <div className="field">
           <div>Name</div>
           <input
             type="text"
@@ -56,7 +56,7 @@ function GeneralInfo(props) {
             onChange={handleInputChange}
           />
         </div>
-        <div>
+        <div className="field">
           <div>Current Position</div>
           <input
             type="text"
@@ -66,7 +66,7 @@ function GeneralInfo(props) {
             onChange={handleInputChange}
           />
         </div>
-        <div>
+        <div className="field">
           <div>Phone Number</div>
           <input
             type="text"
@@ -76,7 +76,7 @@ function GeneralInfo(props) {
             onChange={handleInputChange}
           />
         </div>
-        <div>
+        <div className="field">
           <div>Email</div>
           <input
             type="text"
@@ -86,7 +86,7 @@ function GeneralInfo(props) {
             onChange={handleInputChange}
           />
         </div>
-        <div>
+        <div className="field">
           <div>LinkedIn</div>
           <input
             type="url"
@@ -114,20 +114,21 @@ function GeneralInfo(props) {
 
   return (
     <>
-      <div>
-        <div>
-          <h3>General Information</h3>
-        </div>
+      <details open className="formSection">
+        <summary>General Information</summary>
+
         {submittedData.length > 0 &&
           submittedData.map((data, index) => (
             <div key={index}>
               {isEditing && editIndex === index ? (
                 getGeneralInfoForm()
               ) : (
-                <>
-                  <p>Submitted Data:</p>
-                  <p>{data.name}</p>
-                  <p>{data.currentPosition}</p>
+                <div className="submittedData generalData">
+                  <div>{data.name}</div>
+                  <div>{data.currentPosition}</div>
+                  <div>{data.phoneNumber}</div>
+                  <div>{data.email}</div>
+                  <div>{data.linkedIn}</div>
                   <button onClick={() => handleRemoveData(index)}>
                     Remove
                   </button>
@@ -137,12 +138,12 @@ function GeneralInfo(props) {
                   >
                     Edit
                   </button>
-                </>
+                </div>
               )}
             </div>
           ))}
         {showForm && !isEditing && getGeneralInfoForm()}
-      </div>
+      </details>
     </>
   );
 }

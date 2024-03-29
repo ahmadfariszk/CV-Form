@@ -1,5 +1,5 @@
 import { useState } from "react";
-import "./styles/Parent.css";
+import "../styles/Parent.css";
 import WorkExperience from "./WorkExp";
 import GeneralInfo from "./GeneralInfo";
 import EducationInfo from "./Education";
@@ -113,43 +113,49 @@ function Parent() {
 
   return (
     <div id="mothercontainer">
-      <div>
-        <GeneralInfo
-          formData={generalForm}
-          setFormData={setGeneralForm}
-          submittedData={submittedGeneral}
-          setSubmittedData={setSubmittedGeneral}
-          handleInputChangeFactory={handleInputChangeFactory}
-          handleSubmitFactory={handleSubmitFactory}
-          handleRemoveDataFactory={handleRemoveDataFactory}
-          handleEditDataFactory={handleEditDataFactory}
-        />
-        <WorkExperience
-          formData={workExpForm}
-          setFormData={setWorkExpForm}
-          submittedData={submittedWorkExp}
-          setSubmittedData={setSubmittedWorkExp}
-          handleInputChangeFactory={handleInputChangeFactory}
-          handleSubmitFactory={handleSubmitFactory}
-          handleRemoveDataFactory={handleRemoveDataFactory}
-          handleEditDataFactory={handleEditDataFactory}
-        />
-        <EducationInfo
-          formData={EducationForm}
-          setFormData={setEducationForm}
-          submittedData={submittedEducation}
-          setSubmittedData={setSubmittedEducation}
-          handleInputChangeFactory={handleInputChangeFactory}
-          handleSubmitFactory={handleSubmitFactory}
-          handleRemoveDataFactory={handleRemoveDataFactory}
-          handleEditDataFactory={handleEditDataFactory}
-        />
+      <div className="card">
+        <div className="formsContainer">
+          <GeneralInfo
+            formData={generalForm}
+            setFormData={setGeneralForm}
+            submittedData={submittedGeneral}
+            setSubmittedData={setSubmittedGeneral}
+            handleInputChangeFactory={handleInputChangeFactory}
+            handleSubmitFactory={handleSubmitFactory}
+            handleRemoveDataFactory={handleRemoveDataFactory}
+            handleEditDataFactory={handleEditDataFactory}
+          />
+          <WorkExperience
+            formData={workExpForm}
+            setFormData={setWorkExpForm}
+            submittedData={submittedWorkExp}
+            setSubmittedData={setSubmittedWorkExp}
+            handleInputChangeFactory={handleInputChangeFactory}
+            handleSubmitFactory={handleSubmitFactory}
+            handleRemoveDataFactory={handleRemoveDataFactory}
+            handleEditDataFactory={handleEditDataFactory}
+          />
+          <EducationInfo
+            formData={EducationForm}
+            setFormData={setEducationForm}
+            submittedData={submittedEducation}
+            setSubmittedData={setSubmittedEducation}
+            handleInputChangeFactory={handleInputChangeFactory}
+            handleSubmitFactory={handleSubmitFactory}
+            handleRemoveDataFactory={handleRemoveDataFactory}
+            handleEditDataFactory={handleEditDataFactory}
+          />
+        </div>
       </div>
-      <CVOutput
-        generalData={submittedGeneral}
-        workData={submittedWorkExp}
-        educationData={submittedEducation}
-      />
+      <div className="card">
+        <div>
+          <CVOutput
+            generalData={submittedGeneral}
+            workData={submittedWorkExp}
+            educationData={submittedEducation}
+          />
+        </div>
+      </div>
     </div>
   );
 }

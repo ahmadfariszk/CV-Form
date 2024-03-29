@@ -44,7 +44,7 @@ function WorkExperience(props) {
   function getWorkExpForm() {
     return (
       <form onSubmit={handleSubmit}>
-        <div>
+        <div className="field">
           <div>Job Title</div>
           <input
             type="text"
@@ -54,7 +54,7 @@ function WorkExperience(props) {
             onChange={handleInputChange}
           />
         </div>
-        <div>
+        <div className="field">
           <div>Company</div>
           <input
             type="text"
@@ -64,27 +64,29 @@ function WorkExperience(props) {
             onChange={handleInputChange}
           />
         </div>
-        <div>
+        <div className="field">
           <div>Date</div>
-          <input
-            type="date"
-            name="dateStart"
-            id=""
-            value={formData.dateStart}
-            onChange={handleInputChange}
-          />
-          <div>to</div>{" "}
-          <input
-            type="date"
-            name="dateEnd"
-            id=""
-            value={formData.dateEnd}
-            onChange={handleInputChange}
-          />
+          <div className="date">
+            <input
+              type="date"
+              name="dateStart"
+              id=""
+              value={formData.dateStart}
+              onChange={handleInputChange}
+            />
+            <div>to</div>{" "}
+            <input
+              type="date"
+              name="dateEnd"
+              id=""
+              value={formData.dateEnd}
+              onChange={handleInputChange}
+            />
+          </div>
         </div>
         <div>
           <div>Job duties</div>
-          <div>
+          <div className="field">
             <span>1:</span>
             <input
               type="text"
@@ -94,7 +96,7 @@ function WorkExperience(props) {
               onChange={handleInputChange}
             />
           </div>
-          <div>
+          <div className="field">
             <span>2:</span>
             <input
               type="text"
@@ -104,7 +106,7 @@ function WorkExperience(props) {
               onChange={handleInputChange}
             />
           </div>
-          <div>
+          <div className="field">
             <span>3:</span>
             <input
               type="text"
@@ -133,38 +135,38 @@ function WorkExperience(props) {
 
   return (
     <>
-      <div>
+      <details open className="formSection">
+        <summary>Work Experience</summary>
         <div>
-          <h3>Work Experience</h3>
+          {submittedData.length > 0 &&
+            submittedData.map((data, index) => (
+              <div key={index}>
+                {isEditing && editIndex === index ? (
+                  getWorkExpForm()
+                ) : (
+                  <div className="submittedData">
+                    <div>
+                      {data.jobTitle}, {data.company}
+                    </div>
+                    <button onClick={() => handleRemoveData(index)}>
+                      Remove
+                    </button>
+                    <button
+                      onClick={() => handleEditData(index)}
+                      disabled={isEditing || showForm ? true : false}
+                    >
+                      Edit
+                    </button>
+                  </div>
+                )}
+              </div>
+            ))}
+          {showForm && !isEditing && getWorkExpForm()}
+          {!isEditing && !showForm && (
+            <button onClick={() => setShowForm(true)}>+ Add Workplace</button>
+          )}
         </div>
-        {submittedData.length > 0 &&
-          submittedData.map((data, index) => (
-            <div key={index}>
-              {isEditing && editIndex === index ? (
-                getWorkExpForm()
-              ) : (
-                <>
-                  <p>Submitted Data:</p>
-                  <p>{data.jobTitle}</p>
-                  <p>{data.company}</p>
-                  <button onClick={() => handleRemoveData(index)}>
-                    Remove
-                  </button>
-                  <button
-                    onClick={() => handleEditData(index)}
-                    disabled={isEditing || showForm ? true : false}
-                  >
-                    Edit
-                  </button>
-                </>
-              )}
-            </div>
-          ))}
-        {showForm && !isEditing && getWorkExpForm()}
-        {!isEditing && !showForm && (
-          <button onClick={() => setShowForm(true)}>+ Add Workplace</button>
-        )}
-      </div>
+      </details>
     </>
   );
 }

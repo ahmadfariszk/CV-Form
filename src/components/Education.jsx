@@ -43,7 +43,7 @@ function EducationInfo(props) {
   function getEducationForm() {
     return (
       <form onSubmit={handleSubmit}>
-        <div>
+        <div className="field">
           <div>Course</div>
           <input
             type="text"
@@ -53,7 +53,7 @@ function EducationInfo(props) {
             onChange={handleInputChange}
           />
         </div>
-        <div>
+        <div className="field">
           <div>School/Instituition</div>
           <input
             type="text"
@@ -63,25 +63,27 @@ function EducationInfo(props) {
             onChange={handleInputChange}
           />
         </div>
-        <div>
+        <div className="field">
           <div>Date</div>
-          <input
-            type="date"
-            name="dateStart"
-            id=""
-            value={formData.dateStart}
-            onChange={handleInputChange}
-          />
-          <div>to</div>{" "}
-          <input
-            type="date"
-            name="dateEnd"
-            id=""
-            value={formData.dateEnd}
-            onChange={handleInputChange}
-          />
+          <div className="date">
+            <input
+              type="date"
+              name="dateStart"
+              id=""
+              value={formData.dateStart}
+              onChange={handleInputChange}
+            />
+            <div>to</div>{" "}
+            <input
+              type="date"
+              name="dateEnd"
+              id=""
+              value={formData.dateEnd}
+              onChange={handleInputChange}
+            />
+          </div>
         </div>
-        <div>
+        <div className="field">
           <div>Results</div>
           <input
             type="text"
@@ -109,20 +111,19 @@ function EducationInfo(props) {
 
   return (
     <>
-      <div>
-        <div>
-          <h3>Education</h3>
-        </div>
+      <details open className="formSection">
+        <summary>Education</summary>
+
         {submittedData.length > 0 &&
           submittedData.map((data, index) => (
             <div key={index}>
               {isEditing && editIndex === index ? (
                 getEducationForm()
               ) : (
-                <>
-                  <p>Submitted Data:</p>
-                  <p>{data.jobTitle}</p>
-                  <p>{data.company}</p>
+                <div className="submittedData">
+                  <div>
+                    {data.school}, {data.course}
+                  </div>
                   <button onClick={() => handleRemoveData(index)}>
                     Remove
                   </button>
@@ -132,7 +133,7 @@ function EducationInfo(props) {
                   >
                     Edit
                   </button>
-                </>
+                </div>
               )}
             </div>
           ))}
@@ -140,7 +141,7 @@ function EducationInfo(props) {
         {!isEditing && !showForm && (
           <button onClick={() => setShowForm(true)}>+ Add Workplace</button>
         )}
-      </div>
+      </details>
     </>
   );
 }
