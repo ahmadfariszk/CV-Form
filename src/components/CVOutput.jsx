@@ -4,9 +4,6 @@ import "../styles/CVOutput.css";
 function CVOutput(props) {
   const { generalData, workData, educationData } = props;
 
-  const limitedWorkData = [...workData.slice(0, 3)]; //limit data entry to 3
-  const limitedEducationData = [...educationData.slice(0, 3)];
-
   const formatDate = (dateString) => {
     const parsedDate = new Date(dateString);
     const month = parsedDate.getMonth() + 1; // Adding 1 because getMonth() returns zero-based month index
@@ -35,8 +32,8 @@ function CVOutput(props) {
         </div>
       ))}
       <div className="workContainer">
-        <div className="workContainerHeader">Work Experience</div>
-        {limitedWorkData.map((work) => (
+        {workData.length > 0 && (<div className="workContainerHeader">Work Experience</div>)}
+        {workData.map((work) => (
           <div key={work.jobTitle} className="workSubContainer">
             <div className="workTitle">{work.jobTitle}</div>
             <div className="workCompany">{work.company}</div>
@@ -53,8 +50,8 @@ function CVOutput(props) {
         ))}
       </div>
       <div className="educationContainer">
-        <div className="educationContainerHeader">Education</div>
-        {limitedEducationData.map((education) => (
+        {educationData.length > 0 && (<div className="educationContainerHeader">Education</div>)}
+        {educationData.map((education) => (
           <div key={education.school} className="educationSubContainer">
             <div className="educationDegree">{education.course} </div>
             <div className="educationSchool">{education.school} </div>
