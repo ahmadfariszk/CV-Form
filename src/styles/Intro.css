@@ -1,0 +1,33 @@
+h1{
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+.introContainer{
+    overflow: scroll;
+}
+.introText {
+  padding: 0px 30px;
+  text-align: left;
+}
+.introImage{
+    
+    width: 90%;
+    height: 30%;
+ object-fit: cover;
+ border-radius: 16px;
+}
+/* not used */
+.introImageBackground { /* card not used */
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  margin: -20px -10px;
+  background-image: url(https://images.unsplash.com/photo-1602407294553-6ac9170b3ed0?q=80&w=2574&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D);
+  border-radius: 16px;
+  opacity: 0.7;
+  filter: blur(2px);
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  z-index: -1;
+}

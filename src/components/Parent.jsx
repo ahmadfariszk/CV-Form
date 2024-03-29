@@ -1,14 +1,16 @@
 import { useState } from "react";
 import "../styles/Parent.css";
-import WorkExperience from "./WorkExp";
+import Intro from "./Intro";
 import GeneralInfo from "./GeneralInfo";
+import WorkExperience from "./WorkExp";
 import EducationInfo from "./Education";
 import CVOutput from "./CVOutput";
-import {
-  generalMockData,
-  workMockData,
-  educationMockData,
-} from "../assets/mockdata";
+//Uncomment below to import mockdata 
+// import {
+//   generalMockData,
+//   workMockData,
+//   educationMockData,
+// } from "../assets/mockdata";
 
 function Parent() {
   // State Hook (form data) declarations
@@ -35,6 +37,10 @@ function Parent() {
   const [submittedGeneral, setSubmittedGeneral] = useState([]);
   const [submittedWorkExp, setSubmittedWorkExp] = useState([]);
   const [submittedEducation, setSubmittedEducation] = useState([]);
+
+  // State Hook (non-data) declarations
+  //
+  const [showIntro, setShowIntro] = useState(true);
 
   // Function Factories definitions
   //
@@ -114,38 +120,48 @@ function Parent() {
   return (
     <div id="mothercontainer">
       <div className="card">
-        <div className="formsContainer">
-          <GeneralInfo
-            formData={generalForm}
-            setFormData={setGeneralForm}
-            submittedData={submittedGeneral}
-            setSubmittedData={setSubmittedGeneral}
-            handleInputChangeFactory={handleInputChangeFactory}
-            handleSubmitFactory={handleSubmitFactory}
-            handleRemoveDataFactory={handleRemoveDataFactory}
-            handleEditDataFactory={handleEditDataFactory}
-          />
-          <WorkExperience
-            formData={workExpForm}
-            setFormData={setWorkExpForm}
-            submittedData={submittedWorkExp}
-            setSubmittedData={setSubmittedWorkExp}
-            handleInputChangeFactory={handleInputChangeFactory}
-            handleSubmitFactory={handleSubmitFactory}
-            handleRemoveDataFactory={handleRemoveDataFactory}
-            handleEditDataFactory={handleEditDataFactory}
-          />
-          <EducationInfo
-            formData={EducationForm}
-            setFormData={setEducationForm}
-            submittedData={submittedEducation}
-            setSubmittedData={setSubmittedEducation}
-            handleInputChangeFactory={handleInputChangeFactory}
-            handleSubmitFactory={handleSubmitFactory}
-            handleRemoveDataFactory={handleRemoveDataFactory}
-            handleEditDataFactory={handleEditDataFactory}
-          />
-        </div>
+        {showIntro ? (
+          <Intro 
+          setShowIntro={setShowIntro}
+          showIntro={showIntro}/>
+        ) : (
+          <>
+            <h1>CV Generator</h1>
+            <div className="formsContainer">
+              <GeneralInfo
+                formData={generalForm}
+                setFormData={setGeneralForm}
+                submittedData={submittedGeneral}
+                setSubmittedData={setSubmittedGeneral}
+                handleInputChangeFactory={handleInputChangeFactory}
+                handleSubmitFactory={handleSubmitFactory}
+                handleRemoveDataFactory={handleRemoveDataFactory}
+                handleEditDataFactory={handleEditDataFactory}
+              />
+              <WorkExperience
+                formData={workExpForm}
+                setFormData={setWorkExpForm}
+                submittedData={submittedWorkExp}
+                setSubmittedData={setSubmittedWorkExp}
+                handleInputChangeFactory={handleInputChangeFactory}
+                handleSubmitFactory={handleSubmitFactory}
+                handleRemoveDataFactory={handleRemoveDataFactory}
+                handleEditDataFactory={handleEditDataFactory}
+              />
+              <EducationInfo
+                formData={EducationForm}
+                setFormData={setEducationForm}
+                submittedData={submittedEducation}
+                setSubmittedData={setSubmittedEducation}
+                handleInputChangeFactory={handleInputChangeFactory}
+                handleSubmitFactory={handleSubmitFactory}
+                handleRemoveDataFactory={handleRemoveDataFactory}
+                handleEditDataFactory={handleEditDataFactory}
+              />
+              <button onClick={() => setShowIntro(true)}>Back</button>
+            </div>
+          </>
+        )}
       </div>
       <div className="card">
         <div>
