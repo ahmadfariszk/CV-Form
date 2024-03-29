@@ -54,62 +54,65 @@ function CVOutput(props) {
   }, [educationData]);
 
   return (
-    <div className="CVContainer">
-      {generalData.map((info) => (
-        <div key={info.name} className="headerContainer">
-          <div className="headerName">{info.name}</div>
-          <div className="headerPosition">{info.currentPosition}</div>
-          <div className="headerBrief">
-            will result in 4 Needleticks and 0 Daggers. Additionally, while
-            holding a given void item, picking up its counterpart will instantly
-            corrupt that item as well{" "}
-          </div>
-        </div>
-      ))}
-      {generalData.map((info) => (
-        <div key={info.name} className="contactsContainer">
-          <div>{info.email}</div>
-          <div>{info.phoneNumber}</div>
-          <div>{info.linkedIn}</div>
-        </div>
-      ))}
-      <div className="workContainer">
-        {workData.length > 0 && (
-          <div className="workContainerHeader">Work Experience</div>
-        )}
-        {ordWorkData.map((work) => (
-          <div key={work.jobTitle} className="workSubContainer">
-            <div className="workTitle">{work.jobTitle}</div>
-            <div className="workCompany">{work.company}</div>
-            <div className="workDate">
-              <span>{formatDate(work.dateStart)}</span> -{" "}
-              <span>{formatDate(work.dateEnd)}</span>
+    <>
+    <div className="textPreview">Preview</div>
+      <div className="CVContainer">
+        {generalData.map((info) => (
+          <div key={info.name} className="headerContainer">
+            <div className="headerName">{info.name}</div>
+            <div className="headerPosition">{info.currentPosition}</div>
+            <div className="headerBrief">
+              will result in 4 Needleticks and 0 Daggers. Additionally, while
+              holding a given void item, picking up its counterpart will
+              instantly corrupt that item as well{" "}
             </div>
-            <ul className="workDescription">
-              <li>{work.jobduty1} </li>
-              <li>{work.jobduty2} </li>
-              <li>{work.jobduty3} </li>
-            </ul>
           </div>
         ))}
-      </div>
-      <div className="educationContainer">
-        {educationData.length > 0 && (
-          <div className="educationContainerHeader">Education</div>
-        )}
-        {ordEducationData.map((education) => (
-          <div key={education.school} className="educationSubContainer">
-            <div className="educationDegree">{education.course} </div>
-            <div className="educationSchool">{education.school} </div>
-            <div className="educationDate">
-              {formatDate(education.dateStart)} to{" "}
-              {formatDate(education.dateEnd)}
-            </div>
-            <div className="educationResult">{education.result}</div>
+        {generalData.map((info) => (
+          <div key={info.name} className="contactsContainer">
+            <div>{info.email}</div>
+            <div>{info.phoneNumber}</div>
+            <div>{info.linkedIn}</div>
           </div>
         ))}
+        <div className="workContainer">
+          {workData.length > 0 && (
+            <div className="workContainerHeader">Work Experience</div>
+          )}
+          {ordWorkData.map((work) => (
+            <div key={work.jobTitle} className="workSubContainer">
+              <div className="workTitle">{work.jobTitle}</div>
+              <div className="workCompany">{work.company}</div>
+              <div className="workDate">
+                <span>{formatDate(work.dateStart)}</span> -{" "}
+                <span>{formatDate(work.dateEnd)}</span>
+              </div>
+              <ul className="workDescription">
+                <li>{work.jobduty1} </li>
+                <li>{work.jobduty2} </li>
+                <li>{work.jobduty3} </li>
+              </ul>
+            </div>
+          ))}
+        </div>
+        <div className="educationContainer">
+          {educationData.length > 0 && (
+            <div className="educationContainerHeader">Education</div>
+          )}
+          {ordEducationData.map((education) => (
+            <div key={education.school} className="educationSubContainer">
+              <div className="educationDegree">{education.course} </div>
+              <div className="educationSchool">{education.school} </div>
+              <div className="educationDate">
+                {formatDate(education.dateStart)} to{" "}
+                {formatDate(education.dateEnd)}
+              </div>
+              <div className="educationResult">{education.result}</div>
+            </div>
+          ))}
+        </div>
       </div>
-    </div>
+    </>
   );
 }
 
