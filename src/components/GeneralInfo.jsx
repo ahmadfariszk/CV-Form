@@ -1,3 +1,4 @@
+import { Pencil, Trash2 } from "lucide-react";
 import { useState } from "react";
 
 function GeneralInfo(props) {
@@ -123,21 +124,29 @@ function GeneralInfo(props) {
               {isEditing && editIndex === index ? (
                 getGeneralInfoForm()
               ) : (
-                <div className="submittedData generalData">
+                <div className="entry generalData">
                   <div>{data.name}</div>
                   <div>{data.currentPosition}</div>
                   <div>{data.phoneNumber}</div>
                   <div>{data.email}</div>
                   <div>{data.linkedIn}</div>
-                  <button onClick={() => handleRemoveData(index)}>
-                    Remove
-                  </button>
-                  <button
-                    onClick={() => handleEditData(index)}
-                    disabled={isEditing ? true : false}
-                  >
-                    Edit
-                  </button>
+                  <div className="entryIcons generalIcons">
+                    <button
+                      className="removeBtn"
+                      onClick={() => handleRemoveData(index)}
+                    >
+                      <Trash2 size={16} />
+                      Remove
+                    </button>
+                    <button
+                      className="editBtn"
+                      onClick={() => handleEditData(index)}
+                      disabled={isEditing ? true : false}
+                    >
+                      <Trash2 size={16} />
+                      Edit
+                    </button>
+                  </div>
                 </div>
               )}
             </div>

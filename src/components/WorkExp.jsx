@@ -1,3 +1,4 @@
+import { Pencil, Trash2 } from "lucide-react";
 import { useState } from "react";
 
 function WorkExperience(props) {
@@ -84,7 +85,7 @@ function WorkExperience(props) {
             />
           </div>
         </div>
-        <div>
+        <div className="field">
           <div>Job duties</div>
           <div className="field">
             <span>1:</span>
@@ -144,19 +145,25 @@ function WorkExperience(props) {
                 {isEditing && editIndex === index ? (
                   getWorkExpForm()
                 ) : (
-                  <div className="submittedData">
-                    <div>
+                  <div className="entry">
+                    <div className="submittedData">
                       {data.jobTitle}, {data.company}
                     </div>
-                    <button onClick={() => handleRemoveData(index)}>
-                      Remove
-                    </button>
-                    <button
-                      onClick={() => handleEditData(index)}
-                      disabled={isEditing || showForm ? true : false}
-                    >
-                      Edit
-                    </button>
+                    <div className="entryIcons">
+                      <button
+                        className="removeBtn"
+                        onClick={() => handleRemoveData(index)}
+                      >
+                        <Trash2 size={16} />
+                      </button>
+                      <button
+                        className="editBtn"
+                        onClick={() => handleEditData(index)}
+                        disabled={isEditing || showForm ? true : false}
+                      >
+                        <Pencil size={16} />
+                      </button>
+                    </div>
                   </div>
                 )}
               </div>

@@ -1,3 +1,4 @@
+import { Pencil, Trash2 } from "lucide-react";
 import { useState } from "react";
 
 function EducationInfo(props) {
@@ -120,19 +121,25 @@ function EducationInfo(props) {
               {isEditing && editIndex === index ? (
                 getEducationForm()
               ) : (
-                <div className="submittedData">
-                  <div>
+                <div className="entry">
+                  <div className="submittedData">
                     {data.school}, {data.course}
                   </div>
-                  <button onClick={() => handleRemoveData(index)}>
-                    Remove
-                  </button>
-                  <button
-                    onClick={() => handleEditData(index)}
-                    disabled={isEditing || showForm ? true : false}
-                  >
-                    Edit
-                  </button>
+                  <div className="entryIcons">
+                    <button
+                      className="removeBtn"
+                      onClick={() => handleRemoveData(index)}
+                    >
+                      <Trash2 size={16} />
+                    </button>
+                    <button
+                      className="editBtn"
+                      onClick={() => handleEditData(index)}
+                      disabled={isEditing || showForm ? true : false}
+                    >
+                      <Pencil size={16} />
+                    </button>
+                  </div>
                 </div>
               )}
             </div>
