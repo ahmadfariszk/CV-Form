@@ -37,6 +37,9 @@ function Parent() {
   const [submittedGeneral, setSubmittedGeneral] = useState([]);
   const [submittedWorkExp, setSubmittedWorkExp] = useState([]);
   const [submittedEducation, setSubmittedEducation] = useState([]);
+  // const [submittedGeneral, setSubmittedGeneral] = useState(generalMockData);
+  // const [submittedWorkExp, setSubmittedWorkExp] = useState(workMockData);
+  // const [submittedEducation, setSubmittedEducation] = useState(educationMockData);
 
   // State Hook (non-data) declarations
   //
