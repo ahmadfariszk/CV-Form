@@ -1,5 +1,4 @@
 // import React, { Component } from "react";
-import { Trash2 } from "lucide-react";
 import "../styles/Intro.css";
 
 function Intro(props) {

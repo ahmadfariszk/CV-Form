@@ -143,7 +143,7 @@ function GeneralInfo(props) {
                       onClick={() => handleEditData(index)}
                       disabled={isEditing ? true : false}
                     >
-                      <Trash2 size={16} />
+                      <Pencil size={16} />
                       Edit
                     </button>
                   </div>
