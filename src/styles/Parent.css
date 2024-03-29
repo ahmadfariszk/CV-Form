@@ -30,6 +30,14 @@
   padding: 20px 50px;
   overflow-y: auto;
 }
+.outputWindow{
+  width: 480px;
+  max-height: 80%;
+  padding: 20px 50px;
+  border-radius: 16px;
+  background-color: #dee1e2;
+  overflow-y: auto;
+}
 
 .formSection {
   margin-bottom: 20px;
@@ -204,4 +212,9 @@ input[type="submit"]:not(:disabled):hover:active {
 }
 .submittedData button {
   padding: 0.1rem 0.3rem;
+}
+.printButton{
+  align-self: flex-end;
+  min-width: 150px;
+  background-color: #dfb427d1;
 }

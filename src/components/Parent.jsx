@@ -167,13 +167,14 @@ function Parent() {
         )}
       </div>
       <div className="card">
-        <div>
+        <div className="outputWindow">
           <CVOutput
             generalData={submittedGeneral}
             workData={submittedWorkExp}
             educationData={submittedEducation}
           />
         </div>
+        <button className="printButton">print</button>
       </div>
     </div>
   );
