@@ -1,8 +1,8 @@
-// import React from "react";
+import React from "react";
 import { useEffect, useState } from "react";
 import "../styles/CVOutput.css";
 
-function CVOutput(props) {
+const CVOutput = React.forwardRef((props, ref) => {
   const { generalData, workData, educationData } = props;
 
   //new states to handle the data arrays locally
@@ -56,7 +56,7 @@ function CVOutput(props) {
   return (
     <>
     <div className="textPreview">Preview</div>
-      <div className="CVContainer">
+      <div className="CVContainer" ref={ref}>
         {generalData.map((info) => (
           <div key={info.name} className="headerContainer">
             <div className="headerName">{info.name}</div>
@@ -114,6 +114,8 @@ function CVOutput(props) {
       </div>
     </>
   );
-}
+})
+
+CVOutput.displayName = 'CVOutput';
 
 export default CVOutput;

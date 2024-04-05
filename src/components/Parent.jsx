@@ -1,10 +1,11 @@
-import { useState } from "react";
+import { useRef, useState } from "react";
 import "../styles/Parent.css";
 import Intro from "./Intro";
 import GeneralInfo from "./GeneralInfo";
 import WorkExperience from "./WorkExp";
 import EducationInfo from "./Education";
 import CVOutput from "./CVOutput";
+import { useReactToPrint } from "react-to-print";
 //Uncomment below to import mockdata 
 // import {
 //   generalMockData,
@@ -119,6 +120,9 @@ function Parent() {
       setStateFunction(submittedData[index]); //form pre-fill
     };
   };
+  const componentRef=useRef()
+  const handlePrint = useReactToPrint({content: ()=> componentRef.current})
+  
 
   return (
     <div id="mothercontainer">
@@ -172,9 +176,10 @@ function Parent() {
             generalData={submittedGeneral}
             workData={submittedWorkExp}
             educationData={submittedEducation}
+            ref={componentRef}
           />
         </div>
-        <button className="printButton">print</button>
+        <button className="printButton" onClick={handlePrint}>print</button>
       </div>
     </div>
   );
